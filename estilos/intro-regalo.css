@@ -24,6 +24,12 @@
   display: none;
 }
 
+/* Si el navegador no ejecuta JavaScript, nunca se ve la intro (evita bloquear
+   el sitio). El script añade el atributo data-js al documento. */
+html:not([data-js]) #intro-regalo {
+  display: none;
+}
+
 #intro-regalo.fuera {
   opacity: 0;
   pointer-events: none;

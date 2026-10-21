@@ -10,8 +10,27 @@
  */
 
 (function () {
+  // Marca que hay JavaScript: la intro solo se muestra si el script corre.
+  document.documentElement.setAttribute('data-js', 'si');
+
   const capa = document.getElementById('intro-regalo');
   if (!capa) return;
+
+  const CLAVE_VISTO = 'entheos.regalo.visto';
+
+  // Si ya se abrió el regalo en este navegador, no se vuelve a mostrar.
+  let yaVisto = false;
+  try {
+    yaVisto = window.localStorage.getItem(CLAVE_VISTO) === 'si';
+  } catch {
+    yaVisto = false;
+  }
+
+  if (yaVisto) {
+    capa.setAttribute('hidden', '');
+    document.body.classList.remove('con-intro');
+    return;
+  }
 
   const caja = document.getElementById('intro-caja');
   const boton = document.getElementById('intro-boton');
@@ -23,6 +42,14 @@
   let particulas = [];
   let animacion = null;
   let temporizador = null;
+
+  function recordarVisto() {
+    try {
+      window.localStorage.setItem(CLAVE_VISTO, 'si');
+    } catch {
+      /* Si el navegador bloquea el almacenamiento, no pasa nada. */
+    }
+  }
 
   function ajustarLona() {
     const escala = window.devicePixelRatio || 1;
@@ -105,6 +132,7 @@
     abierto = true;
 
     clearTimeout(temporizador);
+    recordarVisto();
     capa.classList.add('abierta');
     caja.classList.add('explotada');
     lanzarConfeti();
@@ -130,6 +158,7 @@
     if (abierto && animacion) ajustarLona();
   });
 
-  // Si el visitante no hace nada, la caja se abre sola a los 6 segundos.
-  temporizador = setTimeout(abrir, 6000);
+  // El regalo se abre solo cuando el visitante toca la caja o el botón.
+  // (Nada de apertura automática: si se abriera sola, se marcaría como vista
+  // y el visitante nunca llegaría a ver la explosión de confeti.)
 })();
