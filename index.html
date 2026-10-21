@@ -6,9 +6,26 @@
   <title>Entheos Wiki · Entheos Wiki</title>
   <meta name="description" content="Wiki de consulta sobre el mundo de Entheos: continentes, lugares, personajes y objetos.">
   <link rel="stylesheet" href="estilos/estilos.css">
+  <link rel="stylesheet" href="estilos/intro-regalo.css">
   <link rel="icon" href="imagenes/icono.svg" type="image/svg+xml">
 </head>
-<body class="">
+<body class="con-intro">
+
+<div id="intro-regalo" role="dialog" aria-label="Regalo de Lizard Gruñona">
+  <canvas id="intro-confeti" aria-hidden="true"></canvas>
+  <div class="intro-centro">
+    <div class="intro-caja" id="intro-caja" role="button" tabindex="0" aria-label="Abrir el regalo">
+      <div class="intro-caja-lazo" aria-hidden="true"></div>
+      <div class="intro-caja-tapa" aria-hidden="true"></div>
+      <div class="intro-caja-cuerpo" aria-hidden="true"></div>
+    </div>
+    <div class="intro-texto">
+      <h1 class="intro-titulo">Un regalo de Lizard Gruñona</h1>
+      <p class="intro-bajada">Tocá la caja para abrir tu regalo</p>
+    </div>
+    <button class="intro-boton" id="intro-boton" type="button">Abrir el regalo</button>
+  </div>
+</div>
 
 <a class="saltar" href="#contenido-principal">Saltar al contenido</a>
 
@@ -264,5 +281,6 @@
 </footer>
 
 <script src="scripts/aplicacion.js"></script>
+<script src="scripts/intro-regalo.js"></script>
 </body>
 </html>
